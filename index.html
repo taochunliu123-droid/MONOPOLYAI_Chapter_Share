@@ -432,7 +432,11 @@
     <div class="language-selection-screen" id="language-screen">
         <div class="language-selection-container">
             <div class="logo-container">
-                <img src="logo.png" alt="PM Mayors - Where Taiwan AI PM Initiated" id="main-logo">
+                <img src="logo.png" alt="PM Mayors - Where Taiwan AI PM Initiated" id="main-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display:none; padding: 20px; background: #f0f0f0; border-radius: 10px; margin: 20px;">
+                    <p style="color: #333; font-size: 1.5em; margin: 0;">PM MAYORS</p>
+                    <p style="color: #666; font-size: 1em; margin: 5px 0 0 0;">Where Taiwan AI PM Initiated</p>
+                </div>
             </div>
             <h1>🤖 AI Prompt Engineering Monopoly</h1>
             <p class="subtitle">掌握AI提示技巧，與AI合作，使用免費工具！</p>
@@ -497,7 +501,7 @@
                 </div>
                 <div class="monopoly-board" id="game-board" style="display: none;">
                     <div class="board-center">
-                        <img src="logo.png" alt="AI Monopoly Logo" style="max-width: 80%; max-height: 80%;">
+                        <img src="logo.png" alt="AI Monopoly Logo" style="max-width: 80%; max-height: 80%;" onerror="this.style.display='none';">
                         <div id="current-turn" style="margin-top: 20px; font-size: 1.4em;">
                             <strong id="current-turn-label">目前回合: 團隊 1</strong>
                         </div>
@@ -875,13 +879,19 @@
             }
             
             async loadQuestions() {
+                console.log('Starting to load questions.json...');
                 try {
                     const response = await fetch('questions.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
                     this.questionsData = await response.json();
+                    console.log('Questions loaded successfully:', Object.keys(this.questionsData));
                 } catch (error) {
                     console.error('Error loading questions:', error);
                     // Fallback to empty questions if load fails
                     this.questionsData = { "en": {}, "zh-tw": {}, "sw": {} };
+                    alert('Failed to load questions. Please check that questions.json is in the same directory as index.html');
                 }
             }
             
@@ -1453,8 +1463,20 @@
 
         const game = new AIMonopoly();
         
+        // Pre-load questions on page load for faster language selection
+        game.loadQuestions();
+        
         // Language selection function
-        function selectLanguageAndStart(language) {
+        async function selectLanguageAndStart(language) {
+            console.log('Language selected:', language);
+            
+            // Ensure questions are loaded first
+            if (!game.questionsData) {
+                console.log('Loading questions...');
+                await game.loadQuestions();
+                console.log('Questions loaded');
+            }
+            
             game.currentLanguage = language;
             game.boardSpaces = game.getLocalizedBoardSpaces();
             game.opportunities = game.getOpportunities();
@@ -1462,10 +1484,12 @@
             game.questions = game.getQuestions();
             game.updateUILanguage();
             
+            console.log('Hiding language screen, showing game');
             // Hide language selection screen
             document.getElementById('language-screen').classList.add('hidden');
             // Show game
             document.getElementById('game-wrapper').classList.remove('hidden');
+            console.log('Language selection complete');
         }
     </script>
     <div class="footer">
