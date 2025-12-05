@@ -144,6 +144,237 @@
         .message-toast { position: fixed; top: 20px; right: 20px; background: #2c3e50; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 2000; animation: slideIn 0.3s ease; font-size: 1.3em; }
         @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
+        /* Language selection screen - Enhanced Design */
+        .language-selection-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .language-selection-screen::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        .language-selection-screen.hidden {
+            display: none;
+        }
+        .language-selection-container {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        .logo-container {
+            margin-bottom: 35px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .logo-container img {
+            max-width: 400px;
+            width: 85%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .language-selection-container h1 {
+            color: #1e3c72;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .language-selection-container .subtitle {
+            color: #546e7a;
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        .language-reminder {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196f3;
+            border-radius: 15px;
+            padding: 18px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            color: #0d47a1;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+        }
+        .language-reminder strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.25em;
+            color: #01579b;
+        }
+        .mobile-warning {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+            border-radius: 15px;
+            padding: 18px;
+            margin: 20px 0;
+            font-size: 1.15em;
+            color: #e65100;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
+        }
+        .mobile-warning strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.25em;
+            color: #bf360c;
+        }
+        .language-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 35px;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        .language-btn {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            border: none;
+            padding: 22px 50px;
+            border-radius: 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .language-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .language-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .language-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(25, 118, 210, 0.5);
+            background: linear-gradient(135deg, #1e88e5 0%, #1976d2 100%);
+        }
+        .language-btn:active {
+            transform: translateY(-2px);
+        }
+        .language-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .language-selection-container {
+                padding: 40px 30px;
+            }
+            .language-selection-container h1 {
+                font-size: 2.2em;
+            }
+            .logo-container img {
+                max-width: 300px;
+            }
+            .language-btn {
+                font-size: 1.4em;
+                padding: 18px 40px;
+            }
+        }
+        
+        /* Game layout with leaderboard on the right */
+        .game-wrapper {
+            display: flex;
+            gap: 20px;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+        .game-wrapper.hidden {
+            display: none;
+        }
+        .game-main {
+            flex: 1;
+            min-width: 0;
+        }
+        .game-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+        .leaderboard {
+            position: sticky;
+            top: 20px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 0;
+        }
+        
+        @media (max-width: 1200px) {
+            .game-wrapper {
+                flex-direction: column;
+            }
+            .game-sidebar {
+                width: 100%;
+            }
+            .leaderboard {
+                position: static;
+            }
+        }
+        
         /* Footer styling */
         .footer {
             position: fixed;
@@ -169,30 +400,6 @@
         }
         
         /* Language selector styling */
-        .language-selector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .language-selector label {
-            font-weight: bold;
-            font-size: 1.4em;
-            color: #2c3e50;
-        }
-        .language-selector select {
-            padding: 8px 15px;
-            border: 2px solid #3498db;
-            border-radius: 8px;
-            font-size: 1.2em;
-            background-color: white;
-            cursor: pointer;
-        }
-        .language-selector select:focus {
-            outline: none;
-            border-color: #e74c3c;
-        }
         
         /* For 16:9 screens */
         @media (min-aspect-ratio: 16/9) {
@@ -221,57 +428,96 @@
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="header">
-            <h1 id="game-title">🤖 AI提示工程大富翁</h1>
-            <p id="game-subtitle" style="font-size: 1.5em;">掌握AI提示技巧，與AI合作，使用免費工具！</p>
-            <div class="language-selector">
-                <label for="language-select" id="language-label">語言:</label>
-                <select id="language-select">
-                    <option value="zh-tw">繁體中文</option>
-                    <option value="en">English</option>
-                    <option value="sw">Kiswahili</option>
-                </select>
+    <!-- Language Selection Screen -->
+    <div class="language-selection-screen" id="language-screen">
+        <div class="language-selection-container">
+            <div class="logo-container">
+                <img src="logo.png" alt="PM Mayors - Where Taiwan AI PM Initiated" id="main-logo">
             </div>
-        </div>
-        <div class="game-setup">
-            <div class="setup-section">
-                <h3 id="settings-title">遊戲設定</h3>
-                <div class="rounds-selector">
-                    <label for="max-rounds" id="rounds-label">回合數:</label>
-                    <input type="number" id="max-rounds" min="1" max="20" value="10">
-                </div>
+            <h1>🤖 AI Prompt Engineering Monopoly</h1>
+            <p class="subtitle">掌握AI提示技巧，與AI合作，使用免費工具！</p>
+            
+            <div class="language-reminder">
+                <strong>💡 重要提醒 | Important | Muhimu</strong>
+                <div>遊戲開始後無法更改語言，請先選擇您的語言</div>
+                <div>Language cannot be changed after game starts, please select now</div>
+                <div>Lugha haiwezi kubadilishwa baada ya mchezo kuanza, tafadhali chagua sasa</div>
             </div>
-            <div class="setup-section">
-                <h3 id="teams-title">團隊</h3>
-                <div class="team-setup" id="teams-container"></div>
+            
+            <div class="mobile-warning">
+                <strong>⚠️ 裝置建議 | Device Recommendation | Mapendekezo ya Kifaa</strong>
+                <div>不建議手機遊玩，請使用電腦或平板以獲得最佳體驗</div>
+                <div>Not recommended for mobile phones, use desktop or tablet for best experience</div>
+                <div>Haipendekezi kwa simu, tumia kompyuta au tablet kwa uzoefu bora</div>
             </div>
-            <div class="game-controls">
-                <button class="btn" id="start-game-btn">開始遊戲</button>
-                <button class="btn" id="add-team-btn">新增團隊</button>
-                <div class="dice-container" style="display: none;" id="dice-controls">
-                    <div class="dice" id="dice1">🎲</div>
-                    <div class="dice" id="dice2">🎲</div>
-                    <button class="btn" id="roll-dice-btn">擲骰子</button>
-                </div>
+            
+            <div class="language-buttons">
+                <button class="language-btn" onclick="selectLanguageAndStart('zh-tw')">
+                    <span>🇹🇼 繁體中文 Traditional Chinese</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguageAndStart('en')">
+                    <span>🇬🇧 English 英語</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguageAndStart('sw')">
+                    <span>🇹🇿 Kiswahili 斯瓦希里語</span>
+                </button>
             </div>
-        </div>
-        <div class="monopoly-board" id="game-board" style="display: none;">
-        <div class="board-center">
-                <img src="logo.png" alt="AI Monopoly Logo" style="max-width: 80%; max-height: 80%;">
-                <div id="current-turn" style="margin-top: 20px; font-size: 1.4em;">
-                    <strong id="current-turn-label">目前回合: 團隊 1</strong>
-                </div>
-                <div id="round-counter" style="margin-top: 10px; font-size: 1.4em;">
-                    <strong id="round-counter-label">回合: 1</strong>
-                </div>
-            </div>
-        </div>
-        <div class="leaderboard" id="leaderboard" style="display: none;">
-            <h3 id="leaderboard-title">排行榜</h3>
-            <div id="leaderboard-content"></div>
         </div>
     </div>
+
+    <!-- Game Container -->
+    <div class="game-wrapper hidden" id="game-wrapper">
+        <div class="game-main">
+            <div class="game-container">
+                <div class="header">
+                    <h1 id="game-title">🤖 AI提示工程大富翁</h1>
+                    <p id="game-subtitle" style="font-size: 1.5em;">掌握AI提示技巧，與AI合作，使用免費工具！</p>
+                </div>
+                <div class="game-setup">
+                    <div class="setup-section">
+                        <h3 id="settings-title">遊戲設定</h3>
+                        <div class="rounds-selector">
+                            <label for="max-rounds" id="rounds-label">回合數:</label>
+                            <input type="number" id="max-rounds" min="1" max="20" value="10">
+                        </div>
+                    </div>
+                    <div class="setup-section">
+                        <h3 id="teams-title">團隊</h3>
+                        <div class="team-setup" id="teams-container"></div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="btn" id="start-game-btn">開始遊戲</button>
+                        <button class="btn" id="add-team-btn">新增團隊</button>
+                        <div class="dice-container" style="display: none;" id="dice-controls">
+                            <div class="dice" id="dice1">🎲</div>
+                            <div class="dice" id="dice2">🎲</div>
+                            <button class="btn" id="roll-dice-btn">擲骰子</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="monopoly-board" id="game-board" style="display: none;">
+                    <div class="board-center">
+                        <img src="logo.png" alt="AI Monopoly Logo" style="max-width: 80%; max-height: 80%;">
+                        <div id="current-turn" style="margin-top: 20px; font-size: 1.4em;">
+                            <strong id="current-turn-label">目前回合: 團隊 1</strong>
+                        </div>
+                        <div id="round-counter" style="margin-top: 10px; font-size: 1.4em;">
+                            <strong id="round-counter-label">回合: 1</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Leaderboard Sidebar -->
+        <div class="game-sidebar">
+            <div class="leaderboard" id="leaderboard" style="display: none;">
+                <h3 id="leaderboard-title">排行榜</h3>
+                <div id="leaderboard-content"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal" id="question-modal">
         <div class="modal-content">
             <h3 id="modal-title">問題</h3>
@@ -658,7 +904,7 @@
                 document.getElementById('add-team-btn').addEventListener('click', () => this.addTeam());
                 document.getElementById('roll-dice-btn').addEventListener('click', () => this.rollDice());
                 document.getElementById('close-modal-btn').addEventListener('click', () => this.closeModal());
-                document.getElementById('language-select').addEventListener('change', (e) => this.changeLanguage(e.target.value));
+                // Language selector removed - language is chosen before game starts
             }
             
             changeLanguage(language) {
@@ -1206,6 +1452,21 @@
         }
 
         const game = new AIMonopoly();
+        
+        // Language selection function
+        function selectLanguageAndStart(language) {
+            game.currentLanguage = language;
+            game.boardSpaces = game.getLocalizedBoardSpaces();
+            game.opportunities = game.getOpportunities();
+            game.fortunes = game.getFortunes();
+            game.questions = game.getQuestions();
+            game.updateUILanguage();
+            
+            // Hide language selection screen
+            document.getElementById('language-screen').classList.add('hidden');
+            // Show game
+            document.getElementById('game-wrapper').classList.remove('hidden');
+        }
     </script>
     <div class="footer">
         里長伯幫助您用AI玩轉敏捷 | Provided by <a href="https://www.linkedin.com/in/taochunliu/" target="_blank" rel="noopener noreferrer">Tao Chun Liu (PM Mayors)</a>
